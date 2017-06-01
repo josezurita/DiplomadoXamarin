@@ -19,7 +19,7 @@ namespace AndroidApp
         {
             SALLab02.ServiceClient ServiceClient = new SALLab02.ServiceClient();
             string StudentEmail = "jose.zurita@epn.edu.ec";
-            string Password = "Jose099767037.";
+            string Password = "**********";
 
             string myDevice =
                 Android.Provider.Settings.Secure.GetString(
