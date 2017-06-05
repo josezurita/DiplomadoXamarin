@@ -68,7 +68,7 @@ namespace PhoneApp
             var ServiceClient = new SALLab05.ServiceClient();
             var SvcResult = await ServiceClient.ValidateAsync(
                 "jose.zurita@epn.edu.ec",
-                "Jose099767037.",
+                "**************",
                 device);
             Result = $"{SvcResult.Status}\n{SvcResult.Fullname}\n{SvcResult.Token}";
             ValidationText.Text = Result;
