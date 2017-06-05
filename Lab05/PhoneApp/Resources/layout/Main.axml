@@ -24,4 +24,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/CallButton" />
+    <TextView
+        android:text="Cuadro de validación"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:id="@+id/ValidationText"
+        android:layout_margin="16dp"
+        android:gravity="center_horizontal"
+        android:textColor="#ffc400" />
 </LinearLayout>

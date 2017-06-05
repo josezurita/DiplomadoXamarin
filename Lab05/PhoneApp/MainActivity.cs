@@ -15,7 +15,13 @@ namespace PhoneApp
             var PhoneNumberText = FindViewById<EditText>(Resource.Id.PhoneNumberText);
             var TranslateButton = FindViewById<Button>(Resource.Id.TranslateButton);
             var CallButton = FindViewById<Button>(Resource.Id.CallButton);
+            string Device;
 
+            Device = Android.Provider.Settings.Secure.GetString(
+                ContentResolver,
+                Android.Provider.Settings.Secure.AndroidId);
+            Validate(Device);
+            
             CallButton.Enabled = false;
 
             var TranslatedNumber = string.Empty;
@@ -53,6 +59,19 @@ namespace PhoneApp
                 CallDialog.SetNegativeButton("Cancelar", delegate { });
                 CallDialog.Show();
             };
+        }
+
+        public async void Validate(string device)
+        {
+            string Result;
+            var ValidationText = FindViewById<TextView>(Resource.Id.ValidationText);
+            var ServiceClient = new SALLab05.ServiceClient();
+            var SvcResult = await ServiceClient.ValidateAsync(
+                "jose.zurita@epn.edu.ec",
+                "Jose099767037.",
+                device);
+            Result = $"{SvcResult.Status}\n{SvcResult.Fullname}\n{SvcResult.Token}";
+            ValidationText.Text = Result;
         }
     }
 }
