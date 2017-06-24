@@ -4,7 +4,7 @@ using Android.OS;
 
 namespace PhoneApp
 {
-    [Activity(Label = "Phone App", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Theme = "@android:style/Theme.Holo", Label = "Phone App", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         static readonly System.Collections.Generic.List<string> PhoneNumbers = new System.Collections.Generic.List<string>();
@@ -17,12 +17,9 @@ namespace PhoneApp
             var TranslateButton = FindViewById<Button>(Resource.Id.TranslateButton);
             var CallButton = FindViewById<Button>(Resource.Id.CallButton);
             var CallHistoryButton = FindViewById<Button>(Resource.Id.CallHistoryButton);
-            string Device;
-
-            Device = Android.Provider.Settings.Secure.GetString(
-                ContentResolver,
-                Android.Provider.Settings.Secure.AndroidId);
-            //Validate(Device);
+            var ValidateActivityButton = FindViewById<Button>(Resource.Id.ValidateActivityButton);
+            
+            //Validate(Device, correo, contrasena);
             
             CallButton.Enabled = false;
 
@@ -72,19 +69,12 @@ namespace PhoneApp
                 Intent.PutStringArrayListExtra("phoneNumbers", PhoneNumbers);
                 StartActivity(Intent);
             };
-        }
 
-        public async void Validate(string device)
-        {
-            string Result;
-            var ValidationText = FindViewById<TextView>(Resource.Id.ValidationText);
-            var ServiceClient = new SALLab06.ServiceClient();
-            var SvcResult = await ServiceClient.ValidateAsync(
-                "jose.zurita@epn.edu.ec",
-                "**************",
-                device);
-            Result = $"{SvcResult.Status}\n{SvcResult.Fullname}\n{SvcResult.Token}";
-            ValidationText.Text = Result;
+            ValidateActivityButton.Click += (object sender, System.EventArgs e) =>
+            {
+                var Intent = new Android.Content.Intent(this, typeof(ValidateActivity));
+                StartActivity(Intent);
+            };
         }
     }
 }
