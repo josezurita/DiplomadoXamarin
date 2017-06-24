@@ -7,6 +7,7 @@ namespace PhoneApp
     [Activity(Label = "Phone App", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
+        static readonly System.Collections.Generic.List<string> PhoneNumbers = new System.Collections.Generic.List<string>();
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -15,12 +16,13 @@ namespace PhoneApp
             var PhoneNumberText = FindViewById<EditText>(Resource.Id.PhoneNumberText);
             var TranslateButton = FindViewById<Button>(Resource.Id.TranslateButton);
             var CallButton = FindViewById<Button>(Resource.Id.CallButton);
+            var CallHistoryButton = FindViewById<Button>(Resource.Id.CallHistoryButton);
             string Device;
 
             Device = Android.Provider.Settings.Secure.GetString(
                 ContentResolver,
                 Android.Provider.Settings.Secure.AndroidId);
-            Validate(Device);
+            //Validate(Device);
             
             CallButton.Enabled = false;
 
@@ -51,6 +53,10 @@ namespace PhoneApp
                 CallDialog.SetMessage($"Llamar al número {TranslatedNumber}?");
                 CallDialog.SetNeutralButton("Llamar", delegate
                 {
+                    //Agregar el número marcado a la lista de números marcados
+                    PhoneNumbers.Add(TranslatedNumber);
+                    //Habilitar el botón CallHistoryButton
+                    CallHistoryButton.Enabled = true;
                     //Crear un intento para marcar el número telefónico
                     var CallIntent = new Android.Content.Intent(Android.Content.Intent.ActionCall);
                     CallIntent.SetData(Android.Net.Uri.Parse($"tel:{TranslatedNumber}"));
@@ -58,6 +64,13 @@ namespace PhoneApp
                 });
                 CallDialog.SetNegativeButton("Cancelar", delegate { });
                 CallDialog.Show();
+            };
+
+            CallHistoryButton.Click += (object sender, System.EventArgs e) =>
+            {
+                var Intent = new Android.Content.Intent(this, typeof(CallHistoryActivity));
+                Intent.PutStringArrayListExtra("phoneNumbers", PhoneNumbers);
+                StartActivity(Intent);
             };
         }
 
