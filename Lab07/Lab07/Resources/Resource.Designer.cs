@@ -26,6 +26,8 @@ namespace Lab07
 		
 		public static void UpdateIdValues()
 		{
+			global::PCLCrypto.Resource.String.ApplicationName = global::Lab07.Resource.String.ApplicationName;
+			global::PCLCrypto.Resource.String.Hello = global::Lab07.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
@@ -53,6 +55,40 @@ namespace Lab07
 			}
 			
 			private Drawable()
+			{
+			}
+		}
+		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f050002
+			public const int EmailEditText = 2131034114;
+			
+			// aapt resource value: 0x7f050001
+			public const int EmailTextView = 2131034113;
+			
+			// aapt resource value: 0x7f050004
+			public const int PasswordEditText = 2131034116;
+			
+			// aapt resource value: 0x7f050003
+			public const int PasswordTextView = 2131034115;
+			
+			// aapt resource value: 0x7f050005
+			public const int ValidateButton = 2131034117;
+			
+			// aapt resource value: 0x7f050006
+			public const int ValidationResultTextView = 2131034118;
+			
+			// aapt resource value: 0x7f050000
+			public const int ValidationTitleTextView = 2131034112;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Id()
 			{
 			}
 		}
