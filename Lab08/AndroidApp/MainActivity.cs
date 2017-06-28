@@ -25,7 +25,7 @@ namespace AndroidApp
             //UserNameTextView.Text = GetString(Resource.String.UserName);
             //MainLayout.AddView(UserNameTextView);
 
-            Validate(Android.Provider.Settings.Secure.GetString(ContentResolver,Android.Provider.Settings.Secure.AndroidId), "jose.zurita@epn.edu.ec", "Jose099767037.");
+            Validate(Android.Provider.Settings.Secure.GetString(ContentResolver,Android.Provider.Settings.Secure.AndroidId), "jose.zurita@epn.edu.ec", "**************");
         }
         public async void Validate(string device, string correo, string contrasena)
         {
